@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Penguin Pay</string>
+    <string name="phone_label">Please inform the recipient telephone number</string>
+    <string name="phone_prefix">Country Code</string>
+    <string name="amount_input_label">Now enter the amount you want to transfer:</string>
+    <string name="button_label_one">1</string>
+    <string name="button_label_zero">0</string>
+    <string name="text_exchanged_value">The Recipient will receive %d in %s local currency</string>
 </resources>

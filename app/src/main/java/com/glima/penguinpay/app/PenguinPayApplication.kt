@@ -1,4 +1,4 @@
-package com.glima.penguinpay
+package com.glima.penguinpay.app
 
 import android.app.Application
 import com.glima.data.di.DataModule

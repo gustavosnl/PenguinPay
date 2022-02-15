@@ -1,7 +1,8 @@
-package com.glima.penguinpay
+package com.glima.penguinpay.remittance
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.glima.penguinpay.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
