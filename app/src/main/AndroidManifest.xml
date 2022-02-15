@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.glima.penguinpay">
+    package="com.glima.penguinpay" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".app.PenguinPayApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".app.PenguinPayApplication"
-        android:theme="@style/Theme.PenguinPay">
+        android:theme="@style/Theme.PenguinPay" >
+
         <activity
-            android:name="com.glima.penguinpay.remittance.MainActivity"
-            android:exported="true">
+            android:name=".remittance.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

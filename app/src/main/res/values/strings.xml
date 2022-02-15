@@ -5,5 +5,14 @@
     <string name="amount_input_label">Now enter the amount you want to transfer:</string>
     <string name="button_label_one">1</string>
     <string name="button_label_zero">0</string>
-    <string name="text_exchanged_value">The Recipient will receive %d in %s local currency</string>
+    <string name="text_exchanged_value">Total amount the Recipient will receive in %1s currency:\n $%2s</string>
+    <string name="title_activity_money_transfer">MoneyTransferActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

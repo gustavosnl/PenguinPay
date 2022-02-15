@@ -37,6 +37,9 @@ android {
     }
 
     buildFeatures.viewBinding = true
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -51,6 +54,11 @@ dependencies {
 
     // Android X
     implementation(AndroidX.core)
+    implementation("com.google.android.material:material:1.5.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
     runtimeOnly(AndroidX.material)
     implementation(AndroidX.compat)
     implementation(AndroidX.navigation_ui)
