@@ -1,7 +1,7 @@
 package com.glima.domain.business.usecase
 
 import com.glima.domain.business.model.CurrencyExchangeTable
-import com.glima.domain.business.repository.CurrencyRepository
+import com.glima.domain.repository.CurrencyRepository
 
 interface GetCurrentExchangeRate {
     suspend operator fun invoke(): CurrencyExchangeTable

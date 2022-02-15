@@ -58,6 +58,18 @@ dependencies {
     implementation(AndroidX.navigation_fragment)
 
 
+    // Network
+    implementation(Retrofit.core)
+    implementation(Retrofit.moshi_converter)
+    implementation(Retrofit.coroutine_adapter)
+
+    implementation(Moshi.core)
+    implementation(Moshi.kotlin)
+
+    implementation(OkHttp.core)
+    implementation(OkHttp.logging)
+
+
     //Test
     testImplementation(Test.junit)
     androidTestImplementation(Test.android_junit)

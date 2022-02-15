@@ -1,4 +1,4 @@
-package com.glima.domain.business.repository
+package com.glima.domain.repository
 
 import com.glima.domain.business.model.CurrencyExchangeTable
 

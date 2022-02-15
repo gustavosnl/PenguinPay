@@ -40,9 +40,18 @@ dependencies {
     // Dependency Injection
     implementation(Koin.core)
     implementation(Koin.android)
-//
-//    implementation 'androidx.core:core-ktx:1.7.0'
-//    implementation 'androidx.appcompat:appcompat:1.4.1'
+
+
+    // Network
+    implementation(Retrofit.core)
+    implementation(Retrofit.moshi_converter)
+    implementation(Retrofit.coroutine_adapter)
+
+    implementation(Moshi.core)
+    implementation(Moshi.kotlin)
+
+    implementation(OkHttp.core)
+    implementation(OkHttp.logging)
 
 
     //Test
