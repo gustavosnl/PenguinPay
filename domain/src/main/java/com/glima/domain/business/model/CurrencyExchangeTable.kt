@@ -1,9 +1,10 @@
 package com.glima.domain.business.model
 
-import java.math.BigDecimal
 
-data class CurrencyExchangeTable(
-    val exchangeTable: Map<String, BigDecimal>
-)
+class CurrencyExchangeTable(
+    private val exchangeTable: Map<String, Double>
+) {
+    fun getExchangeRate(currencyId: String) = exchangeTable[currencyId]?.toInt() ?: 0
+}
 
 

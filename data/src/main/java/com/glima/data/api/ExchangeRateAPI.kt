@@ -7,5 +7,5 @@ import retrofit2.http.Query
 interface ExchangeRateAPI {
 
     @GET("latest.json")
-    fun getLatestExchangeRates(@Query("app_id") appId: String) : ExchangeTableResponse
+    suspend fun getLatestExchangeRates(@Query("app_id") appId: String) : ExchangeTableResponse
 }

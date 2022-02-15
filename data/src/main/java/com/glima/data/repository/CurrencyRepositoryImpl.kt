@@ -9,7 +9,9 @@ class CurrencyRepositoryImpl(
     private val api: ExchangeRateAPI,
     private val mapper: ExchangeTableMapper
 ) : CurrencyRepository {
-    override fun getCurrentExchange(): CurrencyExchangeTable {
-        TODO("Not yet implemented")
+    override suspend fun getCurrentExchange(): CurrencyExchangeTable {
+        return api.getLatestExchangeRates("48b106a7df5d4c008f275129428a93c2").let {
+            mapper.mapFrom(it)
+        }
     }
 }
