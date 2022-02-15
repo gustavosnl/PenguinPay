@@ -1,4 +1,4 @@
-package com.glima.penguimpay
+package com.glima.penguinpay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

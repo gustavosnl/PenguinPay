@@ -1,4 +1,4 @@
-package com.glima.penguimpay
+package com.glima.penguinpay
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

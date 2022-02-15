@@ -1,4 +1,4 @@
-package com.glima.penguimpay
+package com.glima.penguinpay
 
 import org.junit.Test
 
