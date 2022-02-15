@@ -1,6 +1,5 @@
 package com.glima.domain.business.usecase
 
-import junit.framework.Assert
 import junit.framework.Assert.*
 import org.junit.Test
 
