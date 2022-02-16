@@ -18,4 +18,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="missing_field_warning">It looks like you didn\'t provide the necessary info to send money to someone else.</string>
     <string name="sending_money">We are tranfering %s to the owner of phone %s</string>
+    <string name="money_transfer_succeed">YAAAY!! You Successfuly transfered your Money to someone else :)</string>
+    <string name="money_transfer_failed">OH NO!! Something unexpected happened and we couldn\'t tranfer your Money. Try again later</string>
 </resources>

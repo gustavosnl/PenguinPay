@@ -1,5 +1,7 @@
 package com.glima.penguinpay.remittance
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import com.glima.domain.business.usecase.ConvertToBinary
 import com.glima.domain.business.usecase.GetAvailableReceivingMarkets
 import com.glima.domain.business.usecase.GetCurrentExchangeRate
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class RemittanceViewModel(
     private val convertFromBinary: ConvertFromBinary,
@@ -28,6 +31,10 @@ class RemittanceViewModel(
     private val _receivingMarkets = MutableLiveData<List<MarketVO>>()
     val receivingMarkets: LiveData<List<MarketVO>>
         get() = _receivingMarkets
+
+    private val _isMoneyTransferred = MutableLiveData<Boolean>()
+    val isMoneyTransferred: LiveData<Boolean>
+        get() = _isMoneyTransferred
 
     init {
         updateExchangeTable()
@@ -48,7 +55,8 @@ class RemittanceViewModel(
 
     private fun makeExchangeConversion(amount: String, currencyID: String) {
         val decimalAmount = convertFromBinary(amount)
-        val convertedAmount = decimalAmount.times(currencyExchangeTable!!.getExchangeRate(currencyID))
+        val convertedAmount =
+            decimalAmount.times(currencyExchangeTable!!.getExchangeRate(currencyID))
         _convertedValue.value = convertToBinary(convertedAmount)
     }
 
@@ -59,5 +67,10 @@ class RemittanceViewModel(
     }
 
     fun transferAmount(inputAmount: String) {
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                _isMoneyTransferred.value = Random.nextBoolean()
+            }, 3500
+        )
     }
 }

@@ -116,6 +116,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObservables() {
+        observeAmount()
+        observeMoneyTransferSuccess()
+    }
+
+    private fun observeMoneyTransferSuccess() {
+        viewModel.isMoneyTransferred.observe(this) { isSuccess ->
+            if (isSuccess) {
+                Snackbar.make(binding.root, R.string.money_transfer_succeed, Snackbar.LENGTH_SHORT).show()
+            } else
+                Snackbar.make(binding.root, R.string.money_transfer_failed, Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun observeAmount() {
         viewModel.convertedValue.observe(this) {
             binding.textViewConvertedAmountValue.text =
                 resources.getString(R.string.exchanged_amount_value, it)
