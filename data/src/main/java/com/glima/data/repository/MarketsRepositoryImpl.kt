@@ -13,8 +13,8 @@ class MarketsRepositoryImpl : MarketsRepository {
     private fun createList() = listOf(
         Country("Kenya", "KES", PhoneRule("+254", NINE_DIGITS_PHONE)),
         Country("Nigeria", "NGN", PhoneRule("+234", SEVEN_DIGITS_PHONE)),
-        Country("Tanzania", "TZN", PhoneRule("+255", NINE_DIGITS_PHONE)),
-        Country("Uganda", "UGN", PhoneRule("+256", SEVEN_DIGITS_PHONE)),
+        Country("Tanzania", "TZS", PhoneRule("+255", NINE_DIGITS_PHONE)),
+        Country("Uganda", "UGX", PhoneRule("+256", SEVEN_DIGITS_PHONE)),
     )
 
 }

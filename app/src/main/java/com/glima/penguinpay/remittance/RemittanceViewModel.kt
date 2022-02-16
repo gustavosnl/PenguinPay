@@ -18,7 +18,7 @@ class RemittanceViewModel(
     private val getAvailableReceivingMarkets: GetAvailableReceivingMarkets
 ) : ViewModel() {
 
-    private lateinit var currencyExchangeTable: CurrencyExchangeTable
+    private var currencyExchangeTable: CurrencyExchangeTable? = null
 
     private val _convertedValue = MutableLiveData<String>()
     val convertedValue: LiveData<String>
@@ -34,21 +34,22 @@ class RemittanceViewModel(
         displayMarkets()
     }
 
-
     fun updateExchangeTable() {
         viewModelScope.launch {
             currencyExchangeTable = getCurrentExchangeRate()
         }
     }
 
-    private fun makeExchangeConversion(amount: String, currencyID: String) {
-        val decimalAmount = convertFromBinary(amount)
-        val convertedAmount = decimalAmount.times(currencyExchangeTable.getExchangeRate(currencyID))
-        _convertedValue.value = convertToBinary(convertedAmount)
+    fun handleValueInput(input: String, currencyID: String) {
+        currencyExchangeTable?.let {
+            makeExchangeConversion(input, currencyID)
+        }
     }
 
-    fun handleValueInput(input: String, currencyID: String) {
-        makeExchangeConversion(input, currencyID)
+    private fun makeExchangeConversion(amount: String, currencyID: String) {
+        val decimalAmount = convertFromBinary(amount)
+        val convertedAmount = decimalAmount.times(currencyExchangeTable!!.getExchangeRate(currencyID))
+        _convertedValue.value = convertToBinary(convertedAmount)
     }
 
     private fun displayMarkets() {
