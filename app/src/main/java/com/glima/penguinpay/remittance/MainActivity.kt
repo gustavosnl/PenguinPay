@@ -2,6 +2,7 @@ package com.glima.penguinpay.remittance
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
@@ -33,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         setupAmountInputEditText()
     }
 
+    private fun updateConvertedLabelVisibility() {
+        val visibility =  if (getInputAmount().isNotEmpty()) View.VISIBLE else View.INVISIBLE
+        binding.textViewConvertedAmountLabel.visibility = visibility
+        binding.textViewConvertedAmountValue.visibility = visibility
+
+    }
+
     private fun setupAvailableMarkets() {
         adapter = MarketAdapter(this)
         binding.spinner.adapter = adapter
@@ -43,8 +51,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupOnItemSelect() {
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                changeCurrency(p0, pos)
+            override fun onItemSelected(view: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                val market = (view?.getItemAtPosition(pos) as MarketVO)
+                changeCurrency(market.currency)
+                updatePhoneMask(market.digits)
+                updateCountryCode(market.countryCode)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -52,12 +63,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeCurrency(view: AdapterView<*>?, position: Int) {
+    private fun updateCountryCode(countryCode: String) {
+        binding.textViewCountryCode.text = countryCode
+
+    }
+
+    private fun updatePhoneMask(digits: Int) {
+        binding.editTextPhone.apply {
+            filters = arrayOf(InputFilter.LengthFilter(digits))
+            text.clear()
+        }
+    }
+
+    private fun changeCurrency(currency: String) {
+        binding.textViewConvertedAmountLabel.text = getString(R.string.exchanged_amount_label,currency)
         viewModel.handleValueInput(
-            binding.editTextTextAmount.text.toString(),
-            (view?.getItemAtPosition(position) as MarketVO).currency
+            getInputAmount(),
+            currency
         )
     }
+
+    private fun getInputAmount() = binding.editTextTextAmount.text.toString()
 
     private fun populateAdapter() {
         viewModel.receivingMarkets.observe(this) {
@@ -68,8 +94,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupObservables() {
         viewModel.convertedValue.observe(this) {
-            binding.textViewConvertedAmount.text =
-                resources.getString(R.string.text_exchanged_value, getSelectedCountry(), it)
+            binding.textViewConvertedAmountValue.text =
+                resources.getString(R.string.exchanged_amount_value, it)
         }
     }
 
@@ -81,9 +107,11 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     viewModel.handleValueInput(text.toString(), getSelectedCountry())
+                    updateConvertedLabelVisibility()
                 }
 
-                override fun afterTextChanged(p0: Editable?) {}
+                override fun afterTextChanged(p0: Editable?) {
+                }
             })
         }
     }

@@ -14,25 +14,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:src="@drawable/ic_flag_kenya" />
 
-    <TextView
-        android:id="@+id/countryCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/flag"
-        app:layout_constraintStart_toEndOf="@+id/flag"
-        app:layout_constraintTop_toTopOf="@+id/flag"
-        tools:text="(KES)" />
 
     <TextView
         android:id="@+id/countryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/countryCode"
-        app:layout_constraintStart_toEndOf="@+id/countryCode"
-        app:layout_constraintTop_toTopOf="@+id/countryCode"
+        android:layout_marginStart="24dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="@+id/flag"
+        app:layout_constraintStart_toEndOf="@+id/flag"
+        app:layout_constraintTop_toTopOf="@+id/flag"
         tools:text="Kenya" />
 </androidx.constraintlayout.widget.ConstraintLayout>

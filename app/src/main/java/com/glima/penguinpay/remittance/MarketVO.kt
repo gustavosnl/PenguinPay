@@ -6,7 +6,8 @@ data class MarketVO(
     @DrawableRes val flagIcon: Int,
     val name: String,
     val countryCode: String,
-    val currency: String
+    val currency: String,
+    val digits : Int
 )
 
 

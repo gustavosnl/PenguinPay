@@ -11,7 +11,8 @@ object MarketFactory {
             flagIcon = resolveFlag(country.currencyLabel),
             name = country.name,
             countryCode = country.phoneRule.countryCode,
-            currency = country.currencyLabel
+            currency = country.currencyLabel,
+            digits = country.phoneRule.digits
         )
     }
 

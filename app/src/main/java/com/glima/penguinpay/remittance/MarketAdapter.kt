@@ -26,7 +26,6 @@ class MarketAdapter(activity: Activity) :
 
         country?.let {
             view.flag.setImageResource(country.flagIcon)
-            view.countryCode.text = country.countryCode
             view.countryName.text = country.name
         }
         return view.root
