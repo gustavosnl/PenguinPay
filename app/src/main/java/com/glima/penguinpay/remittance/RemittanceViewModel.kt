@@ -27,7 +27,6 @@ class RemittanceViewModel(
     val convertedValue: LiveData<String>
         get() = _convertedValue
 
-
     private val _receivingMarkets = MutableLiveData<List<MarketVO>>()
     val receivingMarkets: LiveData<List<MarketVO>>
         get() = _receivingMarkets
