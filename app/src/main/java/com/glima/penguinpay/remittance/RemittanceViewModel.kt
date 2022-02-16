@@ -57,4 +57,7 @@ class RemittanceViewModel(
             MarketFactory.make(it)
         }
     }
+
+    fun transferAmount(inputAmount: String) {
+    }
 }

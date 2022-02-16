@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.glima.penguinpay.R
 import com.glima.penguinpay.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,23 +23,44 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel.updateExchangeTable()
         setupObservables()
-    }
-
-    override fun onResume() {
-        super.onResume()
         setupViews()
     }
 
     private fun setupViews() {
         setupAvailableMarkets()
         setupAmountInputEditText()
+        setupFab()
+    }
+
+    private fun setupFab() {
+        binding.floatingActionButton.apply {
+            setOnClickListener {
+                val amount = getInputAmount()
+                if (amount.isEmpty() || !isPhoneValid()) {
+                    displayEmptyFieldWarning()
+                } else {
+                    displaySendingMoney(amount)
+                    viewModel.transferAmount(amount)
+                }
+            }
+        }
+    }
+
+    private fun isPhoneValid() = getPhone().length == getSelectedMarket().digits
+
+    private fun displaySendingMoney(amount: String) {
+        val message = getString(R.string.sending_money, amount, getCompletePhone())
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun displayEmptyFieldWarning() {
+        Snackbar.make(binding.root, R.string.missing_field_warning, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun updateConvertedLabelVisibility() {
-        val visibility =  if (getInputAmount().isNotEmpty()) View.VISIBLE else View.INVISIBLE
+        val visibility = if (getInputAmount().isNotEmpty()) View.VISIBLE else View.INVISIBLE
         binding.textViewConvertedAmountLabel.visibility = visibility
         binding.textViewConvertedAmountValue.visibility = visibility
-
     }
 
     private fun setupAvailableMarkets() {
@@ -76,7 +98,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeCurrency(currency: String) {
-        binding.textViewConvertedAmountLabel.text = getString(R.string.exchanged_amount_label,currency)
+        binding.textViewConvertedAmountLabel.text =
+            getString(R.string.exchanged_amount_label, currency)
         viewModel.handleValueInput(
             getInputAmount(),
             currency
@@ -106,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    viewModel.handleValueInput(text.toString(), getSelectedCountry())
+                    viewModel.handleValueInput(text.toString(), getSelectedCurrency())
                     updateConvertedLabelVisibility()
                 }
 
@@ -116,7 +139,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getSelectedCountry() = (binding.spinner.selectedItem as MarketVO).currency
+    private fun getSelectedMarket() = (binding.spinner.selectedItem as MarketVO)
+
+    private fun getSelectedCurrency() = getSelectedMarket().currency
+
+    private fun getSelectedCountryCode() = getSelectedMarket().countryCode
+
+    private fun getPhone() = binding.editTextPhone.text.toString()
+
+    private fun getCompletePhone() = getSelectedCountryCode() + getPhone()
+
 
 }
 
