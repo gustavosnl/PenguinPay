@@ -8,8 +8,11 @@ object DomainModule {
 
         single<GetCurrentExchangeRate> { GetCurrentExchangeRateUseCase(get()) }
 
+        single<GetAvailableReceivingMarkets> { GetAvailableReceivingMarketsUseCase(get()) }
+
         single<ConvertFromBinary> { ConvertFromBinaryUseCase() }
 
         single<ConvertToBinary> { ConvertToBinaryUseCase() }
+
     }
 }

@@ -1,6 +1,6 @@
 package com.glima.domain.business.model
 
-interface PhoneRule {
-    fun getCountryCode(): String
-    fun getDigitsCount(): Int
-}
+data class PhoneRule(
+    val countryCode: String,
+    val digits: Int
+)

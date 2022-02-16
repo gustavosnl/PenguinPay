@@ -11,18 +11,33 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity() {
     private val viewModel: RemittanceViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: MarketAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel.updateExchangeTable()
-        setupViews()
         setupObservables()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupViews()
+    }
+
     private fun setupViews() {
+        setupAvailableMarkets()
         setupAmountInputEditText()
+    }
+
+    private fun setupAvailableMarkets() {
+        adapter = MarketAdapter(this)
+        binding.spinner.adapter = adapter
+        viewModel.receivingMarkets.observe(this) {
+            adapter.addAll(it)
+            adapter.notifyDataSetChanged()
+        }
     }
 
     private fun setupObservables() {
@@ -46,6 +61,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
     }
-
-
 }
+
+

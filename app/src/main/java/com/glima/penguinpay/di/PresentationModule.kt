@@ -11,7 +11,8 @@ object PresentationModule {
             RemittanceViewModel(
                 convertFromBinary = get(),
                 convertToBinary = get(),
-                getCurrentExchangeRate = get()
+                getCurrentExchangeRate = get(),
+                getAvailableReceivingMarkets = get()
             )
         }
     }
